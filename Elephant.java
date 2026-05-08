@@ -14,6 +14,7 @@ public class Elephant extends Actor
     
     // Direction the elephant is facing
     String facing = "right";
+    SimpleTimer animationTimer = new SimpleTimer();
     
     // constructor
     public Elephant()
@@ -30,6 +31,9 @@ public class Elephant extends Actor
             idleLeft[i].mirrorHorizontally();
             idleLeft[i].scale(100, 100);
         }
+        
+        animationTimer.mark();
+        
         setImage(idleRight[0]);
     }
     
@@ -37,6 +41,12 @@ public class Elephant extends Actor
     int imageIndex = 0;
     public void animateElephant()
     {
+        if(animationTimer.millisElapsed() < 160)
+        {
+            return;
+        }
+        animationTimer.mark();
+        
         if(facing.equals("right"))
         {
             setImage(idleRight[imageIndex]);
